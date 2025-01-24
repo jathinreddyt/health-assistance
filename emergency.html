@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Emergency Hospital Booking</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f2f2f2;
+            color: #333;
+        }
+        header {
+            background-image: url("i.jpg");
+            color: white;
+            padding: 10px 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style: none;
+            padding: 0;
+            margin: 10px 0 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+            max-width: 600px;
+            margin: 30px auto;
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        main h2 {
+            text-align: center;
+            color:#1d8626;
+            margin-bottom: 20px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+
+        form label {
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        form input,
+        form select {
+            margin-top: 5px;
+            padding: 10px;
+            font-size: 16px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        form button {
+            margin-top: 20px;
+            padding: 12px;
+            font-size: 18px;
+            background-color: #1d8626;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        form button:hover {
+            background-color: #c9302c;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            margin-top: 20px;
+            background-color: #158135;
+            color: white;
+        }
+
+        footer p {
+            margin: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Emergency Hospital Booking</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                    <li><a href="appointment.html">Appointment</a></li>
+                    <li><a href="Diet-plan.html">Diet-plan</a></li>
+                    <li><a href="set remainder.html">set Reminders</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="Emergency.html">Emergency</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h2>Book Emergency Service</h2>
+        <form action="#" method="POST">
+            <label for="name">Full Name:</label>
+            <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+            
+            <label for="contact">Contact Number:</label>
+            <input type="tel" id="contact" name="contact" placeholder="Enter your contact number" required>
+            
+            <label for="emergency-type">Emergency Type:</label>
+            <select id="emergency-type" name="emergency-type" required>
+                <option value="" disabled selected>Select Emergency Type</option>
+                <option value="accident">Any emergency situtation</option>
+                <option value="cardiac-arrest">Cardiac Arrest</option>
+                <option value="respiratory-issue">Respiratory Issue</option>
+                <option value="other">Other</option>
+            </select>
+            
+            <label for="location">Location:</label>
+            <input type="text" id="location" name="location" placeholder="Enter your location" required>
+            
+            <label for="notes">Additional Notes:</label>
+            <input type="text" id="notes" name="notes" placeholder="E.g., Patient history (optional)">
+            
+            <button type="submit">Submit Emergency Request</button>
+        </form>
+    </main>
+    <footer>
+        <p>For immediate assistance, call us 24/7 : <strong>9502659285</strong></p>
+    </footer>
+</body>
+</html>

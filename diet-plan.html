@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Plan - Health Care</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General reset and font */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url("d.jpg");
+        }
+
+        header {
+            background-image: url("i.jpg");
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #45a049;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 80vh;
+            flex-direction: column;
+        }
+
+        .diet-plan {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .diet-plan h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .diet-plan p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+
+        .diet-plan ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .diet-plan ul li {
+            background-color: #f1f1f1;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 6px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+
+        .diet-plan ul li h3 {
+            color: #4CAF50;
+            margin: 0;
+        }
+
+        .diet-plan ul li p {
+            margin: 5px 0;
+            font-size: 14px;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .form-container input[type="text"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Health Care Diet Plan</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                    <li><a href="appointment.html">Appointment</a></li>
+                    <li><a href="Diet-plan.html">Diet-plan</a></li>
+                    <li><a href="set remainder.html">set Reminders</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="Emergency.html">Emergency</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Tell Us Your Goal</h2>
+            <p>To help us suggest the best diet plan, please let us know the reason for your diet.</p>
+            <form id="dietForm">
+                <label for="goal">Select Your diet :</label>
+                <select id="goal" name="goal" required>
+                    <option value="">--Select--</option>
+                    <option value="weight_loss">Weight Loss</option>
+                    <option value="muscle_gain">Muscle Gain</option>
+                    <option value="maintain_health">Maintain Health</option>
+                </select>
+
+                <label for="reason">About your health :</label>
+                <input type="text" id="reason" name="reason" placeholder="Describe your reason (optional)" required>
+
+                <button type="submit">Get Diet Plan</button>
+            </form>
+        </div>
+
+        <div id="dietPlanResult" class="diet-plan" style="display:none;">
+            <h2>Your Personalized Diet Plan</h2>
+            <p id="dietPlanMessage"></p>
+
+            <ul id="dietPlanItems"></ul>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Health Monitoring System. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("dietForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from refreshing the page
+            
+            const goal = document.getElementById("goal").value;
+            const reason = document.getElementById("reason").value;
+            let dietPlanMessage = '';
+            let dietItems = [];
+
+            if (goal === "weight_loss") {
+                dietPlanMessage = "Based on your goal of weight loss, here's your diet plan:";
+                dietItems = [
+                    { meal: "Breakfast", time: "7:00 AM - 8:00 AM", food: "Low-calorie oatmeal with berries and green tea.", benefits: "Supports weight loss and keeps you full." },
+                    { meal: "Morning Snack", time: "10:00 AM - 10:30 AM", food: "A handful of almonds.", benefits: "Healthy fats to curb hunger." },
+                    { meal: "Lunch", time: "12:30 PM - 1:30 PM", food: "Grilled chicken with leafy greens and quinoa.", benefits: "Low-calorie, high-protein meal." },
+                    { meal: "Afternoon Snack", time: "3:30 PM - 4:00 PM", food: "Carrot sticks and hummus.", benefits: "Low-calorie, nutrient-dense snack." },
+                    { meal: "Dinner", time: "6:30 PM - 7:30 PM", food: "Grilled salmon with vegetables.", benefits: "Low-fat, high-protein, great for fat burning." }
+                ];
+            } else if (goal === "muscle_gain") {
+                dietPlanMessage = "For muscle gain, we recommend the following diet:";
+                dietItems = [
+                    { meal: "Breakfast", time: "7:00 AM - 8:00 AM", food: "Eggs, avocado toast, and a protein shake.", benefits: "High in protein and healthy fats for muscle building." },
+                    { meal: "Morning Snack", time: "10:00 AM - 10:30 AM", food: "Greek yogurt with nuts.", benefits: "Packed with protein to support muscle growth." },
+                    { meal: "Lunch", time: "12:30 PM - 1:30 PM", food: "Grilled chicken with brown rice and vegetables.", benefits: "Protein and carbs for energy and muscle repair." },
+                    { meal: "Afternoon Snack", time: "3:30 PM - 4:00 PM", food: "Protein bar and a banana.", benefits: "Quick protein for muscle recovery." },
+                    { meal: "Dinner", time: "6:30 PM - 7:30 PM", food: "Steak with sweet potatoes.", benefits: "High in protein and carbs for muscle building." }
+                ];
+            } else if (goal === "maintain_health") {
+                dietPlanMessage = "For maintaining overall health, here’s your diet plan:";
+                dietItems = [
+                    { meal: "Breakfast", time: "7:00 AM - 8:00 AM", food: "Whole grain toast with peanut butter and fruit.", benefits: "Balanced nutrients for a healthy start." },
+                    { meal: "Morning Snack", time: "10:00 AM - 10:30 AM", food: "Fruit smoothie with spinach and protein powder.", benefits: "Great source of vitamins and minerals." },
+                    { meal: "Lunch", time: "12:30 PM - 1:30 PM", food: "Grilled chicken salad with a variety of veggies.", benefits: "Loaded with fiber and protein." },
+                    { meal: "Afternoon Snack", time: "3:30 PM - 4:00 PM", food: "Trail mix with seeds and nuts.", benefits: "Healthy fats for sustained energy." },
+                    { meal: "Dinner", time: "6:30 PM - 7:30 PM", food: "Salmon with quinoa and steamed vegetables.", benefits: "Omega-3 fatty acids for heart health." }
+                ];
+            }
+
+            // Display diet plan
+            document.getElementById("dietPlanMessage").innerText = dietPlanMessage;
+            const dietPlanList = document.getElementById("dietPlanItems");
+            dietPlanList.innerHTML = '';
+            dietItems.forEach(item => {
+                const li = document.createElement('li');
+                li.innerHTML = `<h3>${item.meal}</h3><p><strong>Time:</strong> ${item.time}</p><p><strong>Suggested Foods:</strong> ${item.food}</p><p><strong>Benefits:</strong> ${item.benefits}</p>`;
+                dietPlanList.appendChild(li);
+            });
+
+            // Show the diet plan section
+            document.getElementById("dietPlanResult").style.display = 'block';
+        });
+    </script>
+</body>
+</html>

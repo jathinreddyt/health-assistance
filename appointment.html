@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nearest Hospitals & Doctors in Hyderabad</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            background-color: #f4f7f5;
+        }
+
+        header {
+            background-image: url(i.jpg);
+            color: white;
+            text-align: center;
+            padding: 20px 0;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav {
+            background-color:  #070807;
+            padding: 10px 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+        }
+
+        nav ul li {
+            margin: 0 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            font-size: 16px;
+        }
+
+        nav ul li a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        section h2 {
+            color: #333;
+            font-size: 24px;
+            margin-bottom: 15px;
+        }
+
+        .doctor-section {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+
+        .doctor-card {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            width: calc(33% - 20px);
+        }
+
+        .doctor-card h3 {
+            color: #4CAF50;
+            margin-top: 0;
+        }
+
+        .doctor-card p {
+            margin: 5px 0;
+        }
+
+        .doctor-card a {
+            color: #4CAF50;
+            text-decoration: none;
+        }
+
+        .appointment-form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            margin-top: 20px;
+        }
+
+        .appointment-form input, .appointment-form select, .appointment-form textarea {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .appointment-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        footer {
+            text-align: center;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        #chatbot {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 450px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+        }
+
+        #chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+        }
+
+        #chatbot-messages {
+            padding: 15px;
+            height: 330px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        #chatbot-input {
+            border-top: 1px solid #ccc;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #chatbot-input textarea {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        #chatbot-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 15%;
+        }
+
+        #chatbot-toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 40px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Appointment Booking</h1>
+    </header>
+
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="appointment.html">Appointment</a></li>
+            <li><a href="Diet-plan.html">Diet-plan</a></li>
+            <li><a href="set remainder.html">set Reminders</a></li>
+            <li><a href="schedule.html">Schedule</a></li>
+            <li><a href="Emergency.html">Emergency</a></li>
+            <li><a href="feedback.html">Feedback</a></li>
+        </ul>
+    </nav>
+
+    <main>
+        <section>
+            <h2>Doctors and Specializations in Hyderabad</h2>
+
+            <div class="doctor-section">
+                <div class="doctor-card">
+                    <h3>Cardiologist</h3>
+                    <p>Dr. Ravi Kumar - Specialist in heart diseases</p>
+                    <p><strong>Availability:</strong> Monday - Friday, 9 AM - 5 PM</p>
+                    <p><a href="https://www.google.com/maps?q=Care+Hospital,+Hyderabad" target="_blank">View on Map</a></p>
+                    <p><button onclick="showAppointmentForm('Dr. Ravi Kumar')">Make Appointment</button></p>
+                </div>
+                <div class="doctor-card">
+                    <h3>Dermatologist</h3>
+                    <p>Dr. Anjali Rao - Specialist in skin conditions</p>
+                    <p><strong>Availability:</strong> Tuesday - Thursday, 10 AM - 4 PM</p>
+                    <p><a href="https://www.google.com/maps?q=Kamineni+Hospital,+Hyderabad" target="_blank">View on Map</a></p>
+                    <p><button onclick="showAppointmentForm('Dr. Anjali Rao')">Make Appointment</button></p>
+                </div>
+                <div class="doctor-card">
+                    <h3>Neurologist</h3>
+                    <p>Dr. Suresh Reddy - Specialist in neurological disorders</p>
+                    <p><strong>Availability:</strong> Monday, Wednesday, Friday, 8 AM - 3 PM</p>
+                    <p><a href="https://www.google.com/maps?q=NIMS+Hospital,+Hyderabad" target="_blank">View on Map</a></p>
+                    <p><button onclick="showAppointmentForm('Dr. Suresh Reddy')">Make Appointment</button></p>
+                </div>
+                <div class="doctor-card">
+                    <h3>Orthopedic Surgeon</h3>
+                    <p>Dr. Priya Sharma - Specialist in bone and joint disorders</p>
+                    <p><strong>Availability:</strong> Monday - Saturday, 10 AM - 5 PM</p>
+                    <p><a href="https://www.google.com/maps?q=Apollo+Hospital,+Hyderabad" target="_blank">View on Map</a></p>
+                    <p><button onclick="showAppointmentForm('Dr. Priya Sharma')">Make Appointment</button></p>
+                </div>
+                <div class="doctor-card">
+                    <h3>Pediatrician</h3>
+                    <p>Dr. Kavita Gupta - Specialist in child health</p>
+                    <p><strong>Availability:</strong> Tuesday - Friday, 9 AM - 2 PM</p>
+                    <p><a href="https://www.google.com/maps?q=Rainbow+Hospital,+Hyderabad" target="_blank">View on Map</a></p>
+                    <p><button onclick="showAppointmentForm('Dr. Kavita Gupta')">Make Appointment</button></p>
+                </div>
+                <div class="doctor-card">
+                    <h3>Gastroenterologist</h3>
+                    <p>Dr. Rajesh Varma - Specialist in digestive health</p>
+                    <p><strong>Availability:</strong> Wednesday - Saturday, 11 AM - 6 PM</p>
+                    <p><a href="https://www.google.com/maps?q=Global+Hospital,+Hyderabad" target="_blank">View on Map</a></p>
+                    <p><button onclick="showAppointmentForm('Dr. Rajesh Varma')">Make Appointment</button></p>
+                </div>
+            </div>
+
+            <div id="appointment-form" class="appointment-form" style="display:none;">
+                <h2>Make Appointment with <span id="doctor-name"></span></h2>
+                <form id="appointment">
+                    <label for="date">Select Date:</label>
+                    <input type="date" id="date" name="date" required><br>
+                    <label for="time">Select Time:</label>
+                    <input type="time" id="time" name="time" required><br>
+                    <label for="message">Message/Reason for Visit:</label>
+                    <textarea id="message" name="message" rows="4" required></textarea><br>
+                    <button type="submit">Submit Appointment</button>
+                </form>
+            </div>
+
+        </section>
+    </main>
+    
+    <footer>
+        <a href="index.html">Back to Home</a>
+    </footer>
+
+    <div id="chatbot">
+        <div id="chatbot-header" onclick="toggleChatbot()">AI Chatbot</div>
+        <div id="chatbot-messages">
+            <p>AI Bot: Hello! How can I assist you today? Please tell me your symptoms, and I will suggest doctors and hospitals in Hyderabad.</p>
+        </div>
+        <div id="chatbot-input">
+            <textarea id="user-input" placeholder="Type your message..."></textarea>
+            <button id="chatbot-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <button id="chatbot-toggle-button" onclick="toggleChatbot()">💬</button>
+
+    <script>
+        function showAppointmentForm(doctorName) {
+            document.getElementById('doctor-name').innerText = doctorName;
+            document.getElementById('appointment-form').style.display = 'block';
+        }
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.style.display = chatbot.style.display === 'none' || chatbot.style.display === '' ? 'flex' : 'none';
+        }
+
+        document.getElementById('appointment').addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('Appointment successfully scheduled!');
+            document.getElementById('appointment-form').reset();
+            document.getElementById('appointment-form').style.display = 'none';
+        });
+
+        const doctors = {
+            "heart": "Dr. Ravi Kumar - Cardiologist at Care Hospital, Hyderabad",
+            "skin": "Dr. Anjali Rao - Dermatologist at Kamineni Hospital, Hyderabad",
+            "brain": "Dr. Suresh Reddy - Neurologist at NIMS Hospital, Hyderabad",
+            "bone": "Dr. Priya Sharma - Orthopedic Surgeon at Apollo Hospital, Hyderabad",
+            "child": "Dr. Kavita Gupta - Pediatrician at Rainbow Hospital, Hyderabad",
+            "stomach": "Dr. Rajesh Varma - Gastroenterologist at Global Hospital, Hyderabad"
+        };
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value.trim().toLowerCase();
+            const chatbotMessages = document.getElementById('chatbot-messages');
+            
+            if (userInput !== '') {
+                chatbotMessages.innerHTML += `<p>You: ${userInput}</p>`;
+                
+                let response = "I'm not sure about that symptom. Please consult a healthcare provider for further advice.";
+                Object.keys(doctors).forEach(symptom => {
+                    if (userInput.includes(symptom)) {
+                        response = `AI Bot: I recommend you see ${doctors[symptom]}`;
+                    }
+                });
+
+                chatbotMessages.innerHTML += `<p>${response}</p>`;
+                document.getElementById('user-input').value = '';
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>

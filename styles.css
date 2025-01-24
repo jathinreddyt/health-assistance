@@ -1,0 +1,73 @@
+/* General styles */
+body, html {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    height: 100%;
+    background-color: transparent; /* Make the page background fully transparent */
+}
+
+.content-wrapper {
+    min-height: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: transparent; /* Ensure the background of content wrapper is also transparent */
+}
+
+header {
+    background-image: url("t.webp"); /* Semi-transparent green background */
+    color: white;
+    padding: 20px;
+    text-align: center;
+}
+
+nav ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+nav ul li {
+    display: inline;
+    margin-right: 15px;
+}
+
+nav ul li a {
+    color: rgb(243, 243, 243);
+    text-decoration: none;
+    font-weight: bold;
+}
+
+main {
+    flex-grow: 1;
+}
+
+.hero {
+    background-color: rgb(247, 247, 247); /* Semi-transparent light blue background */
+    text-align: center;
+    padding: 50px;
+}
+
+.features {
+    display: flex;
+    justify-content: space-around;
+    padding: 30px;
+    background-color: rgb(244, 248, 248); /* Semi-transparent white background */
+}
+
+.feature {
+    width: 30%;
+    text-align: center;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(241, 34, 7, 0.479);
+}
+
+footer {
+    background-color: rgb(239, 241, 241); /* Semi-transparent dark background */
+    color: rgb(8, 4, 4);
+    text-align: center;
+    padding: 15px;
+    position: relative;
+    bottom: 0;
+    width: 100%;
+}
