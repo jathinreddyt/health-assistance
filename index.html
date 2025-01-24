@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Health Assistance - Home</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General page styles */
+        body {
+            background-color: #f4f7f5;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        .content-wrapper {
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            padding: 20px;
+            background-image: url("i.jpg");
+            color: white;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .hero {
+            text-align: center;
+            margin: 20px 0;
+        }
+
+        .hero h2 {
+            color: #45a049;
+        }
+
+        .features {
+            display: flex;
+            justify-content: space-around;
+            padding: 20px;
+            background-color: #fff;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .feature {
+            text-align: center;
+        }
+
+        footer {
+            background-color: #2cc12c;
+            text-align: center;
+            padding: 10px;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Chatbot styles */
+        #chatbot {
+            position: fixed;
+            bottom: 80px;
+            right: 20px;
+            width: 350px;
+            height: 500px;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            display: none;
+            flex-direction: column;
+        }
+
+        #chatbot-header {
+            background-color: #007bff;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            border-radius: 10px 10px 0 0;
+            cursor: pointer;
+        }
+
+        #chatbot-messages {
+            padding: 15px;
+            height: 380px;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        #chatbot-input {
+            border-top: 1px solid #ccc;
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #chatbot-input textarea {
+            width: 80%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            resize: none;
+        }
+
+        #chatbot-button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            width: 15%;
+        }
+
+        #chatbot-button:hover {
+            background-color: #45a049;
+        }
+
+        #chatbot-toggle-button {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background-color: #0056b3;
+            color: white;
+            border: none;
+            padding: 25px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 40px;
+            width: 80px;
+            height: 80px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #chatbot-toggle-button:hover {
+            background-color: #004494;
+        }
+    </style>
+</head>
+<body>
+    <div class="content-wrapper">
+        <header>
+            <h1>AI Health Assistance System</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="appointment.html">Appointment</a></li>
+                    <li><a href="diet-plan.html">Diet Plan</a></li>
+                    <li><a href="reminder.html">Reminders</a></li>
+                    <li><a href="schedule.html">Schedule</a></li>
+                    <li><a href="emergency.html">Emergency</a></li>
+                    <li><a href="feedback.html">Feedback</a></li>
+                </ul>
+            </nav>
+        </header>
+        <main>
+            <section class="hero">
+                <h2>Your Health, Our Priority</h2>
+                <p>AI-powered health tips, diet plans, and medical assistance.</p>
+            </section>
+            <section class="features">
+                <div class="feature">
+                    <h3>AI Assistance</h3>
+                    <p>Get personalized health tips and diet plans.</p>
+                </div>
+                <div class="feature">
+                    <h3>Schedule & Reminders</h3>
+                    <p>Never miss an appointment or medication.</p>
+                </div>
+                <div class="feature">
+                    <h3>Emergency Assistance</h3>
+                    <p>Quick help during emergencies.</p>
+                </div>
+            </section>
+        </main>
+    </div>
+    <footer>
+        <p>&copy; 2025 AI Health Assistance. All Rights Reserved.</p>
+    </footer>
+
+    <!-- Chatbot HTML -->
+    <div id="chatbot">
+        <div id="chatbot-header" onclick="toggleChatbot()">AI Chatbot</div>
+        <div id="chatbot-messages">
+            <p>AI Bot: Hello! How can I assist you today? Please tell me your symptoms, and I will provide advice.</p>
+        </div>
+        <div id="chatbot-input">
+            <textarea id="user-input" placeholder="Type your message..."></textarea>
+            <button id="chatbot-button" onclick="sendMessage()">Send</button>
+        </div>
+    </div>
+
+    <!-- Chatbot Toggle Button -->
+    <button id="chatbot-toggle-button" onclick="toggleChatbot()">💬</button>
+
+    <script>
+        const medications = {
+            "headache": "Take Paracetamol 500mg every 4-6 hours.",
+            "fever": "Take Ibuprofen 200mg every 4-6 hours.",
+            "cold": "Take an antihistamine like Benadryl.",
+            "cough": "Use a cough syrup such as Robitussin.",
+            "stomachache": "Take antacids like Ranitidine.",
+            "diarrhea": "Use Loperamide to control symptoms.",
+            "nausea": "Take Dimenhydrinate.",
+            "sore throat": "Gargle with warm salt water and take lozenges.",
+            "muscle pain": "Use Ibuprofen gel or tablets.",
+            "back pain": "Apply a heat pack and use Ibuprofen.",
+            "acidity": "Take antacids like Tums.",
+            "insomnia": "Try Melatonin supplements.",
+            "allergies": "Use antihistamines like Cetirizine.",
+            "constipation": "Take a mild laxative such as Miralax.",
+            "high blood pressure": "Consult a doctor, but avoid high-sodium food.",
+            "diabetes": "Monitor glucose levels and consult your physician.",
+            "asthma": "Use an inhaler as prescribed.",
+            "migraine": "Take Sumatriptan for relief.",
+            "dehydration": "Drink oral rehydration solution (ORS).",
+            "skin rash": "Apply hydrocortisone cream."
+        };
+
+        let chatbotState = 0;
+
+        function toggleChatbot() {
+            const chatbot = document.getElementById('chatbot');
+            chatbot.style.display = chatbot.style.display === 'none' || chatbot.style.display === '' ? 'flex' : 'none';
+        }
+
+        function sendMessage() {
+            const userInput = document.getElementById('user-input').value.trim().toLowerCase();
+            const chatbotMessages = document.getElementById('chatbot-messages');
+
+            if (userInput) {
+                chatbotMessages.innerHTML += `<p>You: ${userInput}</p>`;
+
+                if (chatbotState === 0) {
+                    chatbotMessages.innerHTML += `<p>AI Bot: What symptom are you experiencing? You can describe it briefly.</p>`;
+                    chatbotState = 1;
+                } else if (chatbotState === 1) {
+                    if (medications[userInput]) {
+                        chatbotMessages.innerHTML += `<p>AI Bot: Based on your symptom, I recommend: ${medications[userInput]}</p>`;
+                    } else {
+                        chatbotMessages.innerHTML += `<p>AI Bot: I'm not sure about that symptom. Please consult a healthcare provider for further advice.</p>`;
+                    }
+                    chatbotMessages.innerHTML += `<p>AI Bot: If you have another symptom, let me know or type "exit" to end.</p>`;
+                }
+
+                if (userInput === "exit") {
+                    chatbotMessages.innerHTML += `<p>AI Bot: Thank you for using the health assistant. Stay healthy!</p>`;
+                    chatbotState = 0;
+                }
+
+                document.getElementById('user-input').value = '';
+                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+            }
+        }
+    </script>
+</body>
+</html>
