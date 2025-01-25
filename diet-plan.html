@@ -1,0 +1,287 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Diet Plan - Health Care</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        /* General reset and font */
+        body, html {
+            margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            background-image: url("d.jpg");
+        }
+
+        header {
+            background-image: url("i.jpg");
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+
+        header h1 {
+            margin: 0;
+        }
+
+        nav ul {
+            list-style-type: none;
+            padding: 0;
+            text-align: center;
+            margin-top: 15px;
+        }
+
+        nav ul li {
+            display: inline;
+            margin-right: 15px;
+        }
+
+        nav ul li a {
+            color: white;
+            text-decoration: none;
+            font-weight: bold;
+            padding: 8px 16px;
+            border-radius: 4px;
+            transition: background-color 0.3s;
+        }
+
+        nav ul li a:hover {
+            background-color: #45a049;
+        }
+
+        main {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            min-height: 80vh;
+            flex-direction: column;
+        }
+
+        .diet-plan {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+        }
+
+        .diet-plan h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .diet-plan table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+
+        .diet-plan table, .diet-plan th, .diet-plan td {
+            border: 1px solid #ccc;
+        }
+
+        .diet-plan th, .diet-plan td {
+            padding: 10px;
+            text-align: center;
+        }
+
+        .diet-plan th {
+            background-color: #4CAF50;
+            color: white;
+        }
+
+        .form-container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 800px;
+            margin-bottom: 30px;
+        }
+
+        .form-container input[type="text"],
+        .form-container select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+
+        .form-container button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        footer {
+            background-color: #4CAF50;
+            color: white;
+            text-align: center;
+            padding: 15px;
+        }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>Health Care Diet Plan</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="appointment.html">Appointment</a></li>
+                <li><a href="Diet-plan.html">Diet-plan</a></li>
+                <li><a href="set remainder.html">Set Reminders</a></li>
+                <li><a href="schedule.html">Schedule</a></li>
+                <li><a href="Emergency.html">Emergency</a></li>
+                <li><a href="feedback.html">Feedback</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div class="form-container">
+            <h2>Tell Us Your Goal</h2>
+            <p>To help us suggest the best diet plan, please let us know the reason for your diet.</p>
+            <form id="dietForm">
+                <label for="goal">Select Your Diet Goal:</label>
+                <select id="goal" name="goal" required>
+                    <option value="">--Select--</option>
+                    <option value="weight_loss">Weight Loss</option>
+                    <option value="muscle_gain">Muscle Gain</option>
+                    <option value="maintain_health">Maintain Health</option>
+                </select>
+
+                <label for="type">Select Diet Type:</label>
+                <select id="type" name="type" required>
+                    <option value="">--Select--</option>
+                    <option value="veg">Vegetarian</option>
+                    <option value="non_veg">Non-Vegetarian</option>
+                </select>
+
+                <label for="reason">About your health:</label>
+                <input type="text" id="reason" name="reason" placeholder="Describe your reason (optional)" required>
+
+                <button type="submit">Get Diet Plan</button>
+            </form>
+        </div>
+
+        <div id="dietPlanResult" class="diet-plan" style="display:none;">
+            <h2>Your Personalized Diet Plan for 1 Week</h2>
+            <p id="dietPlanMessage"></p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Day</th>
+                        <th>Breakfast</th>
+                        <th>Lunch</th>
+                        <th>Dinner</th>
+                    </tr>
+                </thead>
+                <tbody id="dietPlanItems"></tbody>
+            </table>
+        </div>
+    </main>
+
+    <footer>
+        <p>&copy; 2025 Health Monitoring System. All Rights Reserved.</p>
+    </footer>
+
+    <script>
+        document.getElementById("dietForm").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent form from refreshing the page
+
+            const goal = document.getElementById("goal").value;
+            const type = document.getElementById("type").value;
+
+            const dietPlanMessage = `Here is your personalized ${type} diet plan for ${goal.replace('_', ' ')}:`;
+            const dietItems = generateWeeklyDiet(goal, type);
+
+            // Update the diet plan message and table
+            document.getElementById("dietPlanMessage").innerText = dietPlanMessage;
+            const dietPlanTable = document.getElementById("dietPlanItems");
+            dietPlanTable.innerHTML = '';
+
+            dietItems.forEach(day => {
+                const row = document.createElement('tr');
+                row.innerHTML = `
+                    <td>${day.day}</td>
+                    <td>${day.breakfast}</td>
+                    <td>${day.lunch}</td>
+                    <td>${day.dinner}</td>
+                `;
+                dietPlanTable.appendChild(row);
+            });
+
+            // Show the diet plan section
+            document.getElementById("dietPlanResult").style.display = 'block';
+        });
+
+        function generateWeeklyDiet(goal, type) {
+            const plans = {
+                veg: {
+                    weight_loss: {
+                        breakfast: "Oatmeal with fruits",
+                        lunch: "Salad with tofu",
+                        dinner: "Veggie stir-fry"
+                    },
+                    muscle_gain: {
+                        breakfast: "Quinoa with lentils",
+                        lunch: "Vegetable curry",
+                        dinner: "Paneer with whole grain bread"
+                    },
+                    maintain_health: {
+                        breakfast: "Smoothie bowl",
+                        lunch: "Grilled veggies",
+                        dinner: "Vegetable pasta"
+                    }
+                },
+                non_veg: {
+                    weight_loss: {
+                        breakfast: "Boiled eggs",
+                        lunch: "Chicken salad",
+                        dinner: "Grilled fish"
+                    },
+                    muscle_gain: {
+                        breakfast: "Chicken breast",
+                        lunch: "Egg omelet",
+                        dinner: "Fish curry"
+                    },
+                    maintain_health: {
+                        breakfast: "Turkey sandwich",
+                        lunch: "Steamed fish",
+                        dinner: "Chicken soup"
+                    }
+                }
+            };
+
+            const meals = plans[type][goal] || {};
+            return [
+                { day: "Monday", ...meals },
+                { day: "Tuesday", ...meals },
+                { day: "Wednesday", ...meals },
+                { day: "Thursday", ...meals },
+                { day: "Friday", ...meals },
+                { day: "Saturday", ...meals },
+                { day: "Sunday", ...meals }
+            ];
+        }
+    </script>
+</body>
+</html>
