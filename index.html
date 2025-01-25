@@ -4,7 +4,6 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AI Health Assistance - Home</title>
-    <link rel="stylesheet" href="styles.css">
     <style>
         /* General page styles */
         body {
@@ -12,6 +11,7 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;
+            font-family: Arial, sans-serif;
         }
 
         .content-wrapper {
@@ -40,15 +40,62 @@
             text-decoration: none;
         }
 
-        .hero {
+        nav ul li a.active {
+            font-weight: bold;
+            text-decoration: underline;
+        }
+
+        footer {
+            background-color: #2cc12c;
             text-align: center;
+            padding: 10px;
+            color: white;
+            position: fixed;
+            width: 100%;
+            bottom: 0;
+        }
+
+        /* Health Monitoring Section */
+        .health-monitoring {
+            background-color: #ffffff;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
             margin: 20px 0;
         }
 
-        .hero h2 {
-            color: #45a049;
+        .health-monitoring h2 {
+            text-align: center;
+            color: #4CAF50;
+            margin-bottom: 20px;
         }
 
+        .health-metrics {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+
+        .metric-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            padding: 20px;
+            text-align: center;
+        }
+
+        .metric-card h3 {
+            color: #4CAF50;
+            font-size: 1.2em;
+            margin-bottom: 10px;
+        }
+
+        .metric-card .value {
+            font-size: 2em;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* Features Section */
         .features {
             display: flex;
             justify-content: space-around;
@@ -60,16 +107,6 @@
 
         .feature {
             text-align: center;
-        }
-
-        footer {
-            background-color: #2cc12c;
-            text-align: center;
-            padding: 10px;
-            color: white;
-            position: fixed;
-            width: 100%;
-            bottom: 0;
         }
 
         /* Chatbot styles */
@@ -101,6 +138,8 @@
             height: 380px;
             overflow-y: auto;
             flex-grow: 1;
+            font-size: 14px;
+            line-height: 1.5;
         }
 
         #chatbot-input {
@@ -113,7 +152,7 @@
         #chatbot-input textarea {
             width: 80%;
             padding: 10px;
-            border: none;
+            border: 1px solid #ccc;
             border-radius: 5px;
             resize: none;
         }
@@ -153,6 +192,22 @@
         #chatbot-toggle-button:hover {
             background-color: #004494;
         }
+
+        .bot-message {
+            background-color: #e0f7fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: left;
+        }
+
+        .user-message {
+            background-color: #d1c4e9;
+            padding: 10px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            text-align: right;
+        }
     </style>
 </head>
 <body>
@@ -161,21 +216,40 @@
             <h1>AI Health Assistance System</h1>
             <nav>
                 <ul>
-                    <li><a href="index.html">Home</a></li>
-                    <li><a href="appointment.html">Appointment</a></li>
-                    <li><a href="diet-plan.html">Diet Plan</a></li>
-                    <li><a href="reminder.html">Reminders</a></li>
-                    <li><a href="schedule.html">Schedule</a></li>
-                    <li><a href="emergency.html">Emergency</a></li>
-                    <li><a href="feedback.html">Feedback</a></li>
+                    <li><a href="#" class="active">Home</a></li>
+                    <li><a href="#">Appointment</a></li>
+                    <li><a href="#">Diet Plan</a></li>
+                    <li><a href="#">Reminders</a></li>
+                    <li><a href="#">Schedule</a></li>
+                    <li><a href="#">Emergency</a></li>
+                    <li><a href="#">Feedback</a></li>
                 </ul>
             </nav>
         </header>
+
         <main>
-            <section class="hero">
-                <h2>Your Health, Our Priority</h2>
-                <p>AI-powered health tips, diet plans, and medical assistance.</p>
+            <section class="health-monitoring">
+                <h2>Health Monitoring</h2>
+                <div class="health-metrics">
+                    <div class="metric-card">
+                        <h3>SpO₂ Levels</h3>
+                        <p class="value">95%</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Blood Pressure</h3>
+                        <p class="value">120/80 mmHg</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Heart Rate</h3>
+                        <p class="value">72 bpm</p>
+                    </div>
+                    <div class="metric-card">
+                        <h3>Body Temperature</h3>
+                        <p class="value">98.6°F</p>
+                    </div>
+                </div>
             </section>
+
             <section class="features">
                 <div class="feature">
                     <h3>AI Assistance</h3>
@@ -192,84 +266,77 @@
             </section>
         </main>
     </div>
+
     <footer>
         <p>&copy; 2025 AI Health Assistance. All Rights Reserved.</p>
     </footer>
 
-    <!-- Chatbot HTML -->
+    <!-- Chatbot -->
     <div id="chatbot">
-        <div id="chatbot-header" onclick="toggleChatbot()">AI Chatbot</div>
+        <div id="chatbot-header">Health Chatbot</div>
         <div id="chatbot-messages">
-            <p>AI Bot: Hello! How can I assist you today? Please tell me your symptoms, and I will provide advice.</p>
+            <p class="bot-message">Hello! I am here to help you with basic medicines. Please tell me your symptoms.</p>
         </div>
         <div id="chatbot-input">
-            <textarea id="user-input" placeholder="Type your message..."></textarea>
-            <button id="chatbot-button" onclick="sendMessage()">Send</button>
+            <textarea id="user-input" rows="1" placeholder="Enter your symptoms..."></textarea>
+            <button id="chatbot-button">Send</button>
         </div>
     </div>
-
-    <!-- Chatbot Toggle Button -->
-    <button id="chatbot-toggle-button" onclick="toggleChatbot()">💬</button>
+    <button id="chatbot-toggle-button">💬</button>
 
     <script>
-        const medications = {
-            "headache": "Take Paracetamol 500mg every 4-6 hours.",
-            "fever": "Take Ibuprofen 200mg every 4-6 hours.",
-            "cold": "Take an antihistamine like Benadryl.",
-            "cough": "Use a cough syrup such as Robitussin.",
-            "stomachache": "Take antacids like Ranitidine.",
-            "diarrhea": "Use Loperamide to control symptoms.",
-            "nausea": "Take Dimenhydrinate.",
-            "sore throat": "Gargle with warm salt water and take lozenges.",
-            "muscle pain": "Use Ibuprofen gel or tablets.",
-            "back pain": "Apply a heat pack and use Ibuprofen.",
-            "acidity": "Take antacids like Tums.",
-            "insomnia": "Try Melatonin supplements.",
-            "allergies": "Use antihistamines like Cetirizine.",
-            "constipation": "Take a mild laxative such as Miralax.",
-            "high blood pressure": "Consult a doctor, but avoid high-sodium food.",
-            "diabetes": "Monitor glucose levels and consult your physician.",
-            "asthma": "Use an inhaler as prescribed.",
-            "migraine": "Take Sumatriptan for relief.",
-            "dehydration": "Drink oral rehydration solution (ORS).",
-            "skin rash": "Apply hydrocortisone cream."
+        const chatbot = document.getElementById('chatbot');
+        const toggleButton = document.getElementById('chatbot-toggle-button');
+        const messages = document.getElementById('chatbot-messages');
+        const userInput = document.getElementById('user-input');
+        const sendButton = document.getElementById('chatbot-button');
+
+        // Symptom-medicine mapping
+        const symptomsToMedicines = {
+            cold: "Paracetamol or Cetirizine",
+            headache: "Ibuprofen or Aspirin",
+            fever: "Paracetamol or Tylenol",
+            "stomach pain": "Antacid or Buscopan",
+            allergy: "Loratadine or Cetirizine"
         };
 
-        let chatbotState = 0;
-
-        function toggleChatbot() {
-            const chatbot = document.getElementById('chatbot');
+        // Toggle chatbot visibility
+        toggleButton.addEventListener('click', () => {
             chatbot.style.display = chatbot.style.display === 'none' || chatbot.style.display === '' ? 'flex' : 'none';
-        }
+        });
 
-        function sendMessage() {
-            const userInput = document.getElementById('user-input').value.trim().toLowerCase();
-            const chatbotMessages = document.getElementById('chatbot-messages');
+        // Handle sending user input
+        sendButton.addEventListener('click', () => {
+            const userMessage = userInput.value.trim();
+            if (userMessage) {
+                // Display user's message
+                const userMessageElement = document.createElement('p');
+                userMessageElement.classList.add('user-message');
+                userMessageElement.textContent = userMessage;
+                messages.appendChild(userMessageElement);
 
-            if (userInput) {
-                chatbotMessages.innerHTML += `<p>You: ${userInput}</p>`;
-
-                if (chatbotState === 0) {
-                    chatbotMessages.innerHTML += `<p>AI Bot: What symptom are you experiencing? You can describe it briefly.</p>`;
-                    chatbotState = 1;
-                } else if (chatbotState === 1) {
-                    if (medications[userInput]) {
-                        chatbotMessages.innerHTML += `<p>AI Bot: Based on your symptom, I recommend: ${medications[userInput]}</p>`;
-                    } else {
-                        chatbotMessages.innerHTML += `<p>AI Bot: I'm not sure about that symptom. Please consult a healthcare provider for further advice.</p>`;
+                // Find a response
+                let response = "I'm sorry, I don't recognize those symptoms. Please try again.";
+                for (const symptom in symptomsToMedicines) {
+                    if (userMessage.toLowerCase().includes(symptom)) {
+                        response = `💊 Recommended medicine for ${symptom}: ${symptomsToMedicines[symptom]}`;
+                        break;
                     }
-                    chatbotMessages.innerHTML += `<p>AI Bot: If you have another symptom, let me know or type "exit" to end.</p>`;
                 }
 
-                if (userInput === "exit") {
-                    chatbotMessages.innerHTML += `<p>AI Bot: Thank you for using the health assistant. Stay healthy!</p>`;
-                    chatbotState = 0;
-                }
+                // Display bot's response
+                const botMessageElement = document.createElement('p');
+                botMessageElement.classList.add('bot-message');
+                botMessageElement.textContent = response;
+                messages.appendChild(botMessageElement);
 
-                document.getElementById('user-input').value = '';
-                chatbotMessages.scrollTop = chatbotMessages.scrollHeight;
+                // Scroll to the bottom
+                messages.scrollTop = messages.scrollHeight;
+
+                // Clear user input
+                userInput.value = '';
             }
-        }
+        });
     </script>
 </body>
 </html>
